@@ -1,0 +1,40 @@
+.Menu-container {
+  position: absolute;
+  transform: translate(0, 40vh);
+}
+
+.Menu-play {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Menu-play-title {
+  color: white;
+  font-size: 28px;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  cursor: pointer;
+}
+
+.Menu-play-subtitle {
+  color: silver;
+  font-size: 18px;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-top: 20px;
+}
+
+.Menu-lost {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Menu-lost-title {
+  color: maroon;
+  font-size: 36px;
+}
+
+.Menu-won-title {
+  color: blue;
+  font-size: 36px;
+}

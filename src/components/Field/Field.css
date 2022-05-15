@@ -1,0 +1,16 @@
+.Field-container {
+  width: 600px;
+  height: 600px;
+  background-color: black;
+  border-radius: 10px;
+  /* outline: 2px solid black; */
+  overflow: hidden;
+}
+
+.Field-row {
+  display: flex;
+}
+
+.Field-overlay {
+  opacity: 0.75;
+}

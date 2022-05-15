@@ -1,0 +1,63 @@
+.Tile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background-color: #74A366;
+}
+
+.Tile-enabled:hover {
+  opacity: 0.7;
+}
+
+.Tile-light {
+  background-color: #74A366;
+}
+
+.Tile-dark {
+  background-color: #6A995C;
+}
+
+.Tile-revealed-light {
+  background-color: #FFEEA3;
+}
+
+.Tile-revealed-dark {
+  background-color: #F3E39C;
+}
+
+.Tile-mine {
+  /* background-color: darkred; */
+  background-image: url(mine.svg);
+  background-size: 30px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.Tile-flag {
+  background-image: url(flag.svg);
+  background-size: 30px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.Tile-left-outline {
+  box-sizing: border-box;
+  border-left: 4px solid #DAB71B;
+}
+
+.Tile-right-outline {
+  box-sizing: border-box;
+  border-right: 4px solid #DAB71B;
+}
+
+.Tile-top-outline {
+  box-sizing: border-box;
+  border-top: 4px solid #DAB71B;
+}
+
+.Tile-bottom-outline {
+  box-sizing: border-box;
+  border-bottom: 4px solid #DAB71B;
+}
