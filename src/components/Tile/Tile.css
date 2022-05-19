@@ -7,24 +7,29 @@
   background-color: #74A366;
 }
 
+
 .Tile-enabled:hover {
   opacity: 0.7;
 }
 
 .Tile-light {
   background-color: #74A366;
+  /* border-color: #74A366; */
 }
 
 .Tile-dark {
   background-color: #6A995C;
+  /* border-color: #6A995C; */
 }
 
 .Tile-revealed-light {
   background-color: #FFEEA3;
+  /* border-color: #FFEEA3; */
 }
 
 .Tile-revealed-dark {
   background-color: #F3E39C;
+  /* border-color: #F3E39C; */
 }
 
 .Tile-mine {
@@ -42,22 +47,106 @@
   background-position: center;
 }
 
-.Tile-left-outline {
+.Tile-border {
+  position: absolute;
+  width: 40px;
+  height: 40px;
   box-sizing: border-box;
-  border-left: 4px solid #DAB71B;
 }
 
-.Tile-right-outline {
-  box-sizing: border-box;
-  border-right: 4px solid #DAB71B;
+.Tile-border-left {
+  border-left: 2px solid #406348;
 }
 
-.Tile-top-outline {
-  box-sizing: border-box;
-  border-top: 4px solid #DAB71B;
+.Tile-border-right {
+  border-right: 2px solid #406348;
 }
 
-.Tile-bottom-outline {
-  box-sizing: border-box;
-  border-bottom: 4px solid #DAB71B;
+.Tile-border-top {
+  border-top: 2px solid #406348;
+}
+
+.Tile-border-bottom {
+  border-bottom: 2px solid #406348;
+}
+
+.Tile-border-field-top-left {
+  border-top-left-radius: 10px;
+}
+
+.Tile-border-field-top-right {
+  border-top-right-radius: 10px;
+}
+
+.Tile-border-field-bottom-right {
+  border-bottom-right-radius: 10px;
+}
+
+.Tile-border-field-bottom-left {
+  border-bottom-left-radius: 10px;
+}
+
+.Tile-border-corner {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background-color: #406348;
+}
+
+.Tile-border-top-left {
+  top: 0;
+  left: 0;
+}
+
+.Tile-border-top-right {
+  top: 0;
+  right: 0;
+}
+
+.Tile-border-bottom-right {
+  bottom: 0;
+  right: 0;
+}
+
+.Tile-border-bottom-left {
+  bottom: 0;
+  left: 0;
+}
+
+.Tile-danger {
+  font-weight: 700;
+}
+
+.Tile-danger-one {
+  color: #F18F01;
+}
+
+.Tile-danger-two {
+  color: #2E86AB;
+
+}
+
+.Tile-danger-three {
+  color: #B4417E;
+
+}
+
+.Tile-danger-four {
+  color: #C43E1C;
+}
+
+.Tile-danger-five {
+  color: #3E442B;
+}
+
+.Tile-danger-six {
+  color: #8E5601;
+}
+
+.Tile-danger-seven {
+  color: #782B54;
+}
+
+.Tile-danger-eight {
+  color: #1E5771;
 }

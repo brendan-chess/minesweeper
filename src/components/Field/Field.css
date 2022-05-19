@@ -3,8 +3,9 @@
   height: 600px;
   background-color: black;
   border-radius: 10px;
-  /* outline: 2px solid black; */
   overflow: hidden;
+  margin-top: 50px;
+  position: relative;
 }
 
 .Field-row {

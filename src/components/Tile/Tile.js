@@ -133,22 +133,129 @@ const getStyle = (id, danger, gameState, flag, dangers, size) => {
   if(id % 2 === 0) style += 'Tile-light '
   else style += 'Tile-dark '
 
-  // outlines
-  // if(danger >= 0) {
-  //   if(id % size === 0 || dangers[id - 1] === -1) {
-  //     style += 'Tile-left-outline '
-  //   }
-  //   if((id + 1) % size === 0 || dangers[id + 1] === -1) {
-  //     style += 'Tile-right-outline '
-  //   }
-  //   if(id < size || dangers[id - size] === -1) {
-  //     style += 'Tile-top-outline '
-  //   }
-  //   if(id >= (size * size) - size || dangers[id + size] === -1) {
-  //     style += 'Tile-bottom-outline '
-  //   }
-  // }
+  return style
+}
 
+const getMainBorder = (id, size, danger, dangers) => {
+  let style = 'Tile-border '
+
+  let revealed = danger >= 0 && danger < 10
+
+  if(revealed) {
+    let inFirstColumn = id % size === 0
+    let inLastColumn = (id + 1) % size === 0
+    let inTopRow = id < size
+    let inBottomRow = id >= (size * size) - size
+
+    let leftUnrevealed = dangers[id - 1] === -1 || dangers[id - 1] === 10
+    let rightUnrevealed = dangers[id + 1] === -1 || dangers[id + 1] === 10
+    let topUnrevealed = dangers[id - size] === -1 || dangers[id - size] === 10
+    let bottomUnrevealed = dangers[id + size] === -1 || dangers[id + size] === 10
+
+    if(inFirstColumn || leftUnrevealed) {
+      style += 'Tile-border-left '
+    }
+    if(inLastColumn || rightUnrevealed) {
+      style += 'Tile-border-right '
+    }
+    if(inTopRow || topUnrevealed) {
+      style += 'Tile-border-top '
+    }
+    if(inBottomRow || bottomUnrevealed) {
+      style += 'Tile-border-bottom '
+    }
+  }
+
+  // Field corners need a border radius
+  if(id === 0) style += 'Tile-border-field-top-left'
+  else if(id === size - 1) style += 'Tile-border-field-top-right'
+  else if(id === (size * size) - 1) style += 'Tile-border-field-bottom-right'
+  else if(id === (size * size) - size) style += 'Tile-border-field-bottom-left'
+
+  return style
+}
+
+const getCornerBorders = (id, size, danger, dangers) => {
+  // Unrevealed tiles do not have borders at all (this includes flags)
+  // 0 danger tiles do not have corner borders
+  if(danger === -1 || danger === 10 || danger === 0) return
+
+  let cornerBorders = []
+
+  // Check which of these combinations of tiles are revealed
+  // If so, they may need a corner border to close their seam
+  const leftAndTopRevealed = (dangers[id - 1] > 0 && dangers[id - 1] < 10) && (dangers[id - size] > 0 && dangers[id - size] < 10)
+  const rightAndTopRevealed = (dangers[id + 1] > 0 && dangers[id + 1] < 10) && (dangers[id - size] > 0 && dangers[id - size] < 10)
+  const rightAndBottomRevealed = (dangers[id + 1] > 0 && dangers[id + 1] < 10) && (dangers[id + size] > 0 && dangers[id + size] < 10)
+  const leftAndBottomRevealed = (dangers[id - 1] > 0 && dangers[id - 1] < 10) && (dangers[id + size] > 0 && dangers[id + size] < 10)
+
+  if(leftAndTopRevealed) {
+    // If the top-left neighbor is unrevealed,
+    // close the seam between the top and left borders
+    const topLeftUnrevealed = dangers[id - size - 1] === -1 || dangers[id - size - 1] === 10
+
+    if(topLeftUnrevealed) {
+      cornerBorders.push(<div className='Tile-border-corner Tile-border-top-left ' />)
+    }
+  }
+
+  if(rightAndTopRevealed) {
+    const topRightUnrevealed = dangers[id - size + 1] === -1 || dangers[id - size + 1] === 10
+
+    if(topRightUnrevealed) {
+      cornerBorders.push(<div className='Tile-border-corner Tile-border-top-right ' />)
+    }
+  }
+
+  if(rightAndBottomRevealed) {
+    const bottomRightUnrevealed = dangers[id + size + 1] === -1 || dangers[id + size + 1] === 10
+
+    if(bottomRightUnrevealed) {
+      cornerBorders.push(<div className='Tile-border-corner Tile-border-bottom-right ' />)
+    }
+  }
+
+  if(leftAndBottomRevealed) {
+    const bottomLeftUnrevealed = dangers[id + size - 1] === -1 || dangers[id + size - 1] === 10
+
+    if(bottomLeftUnrevealed) {
+      cornerBorders.push(<div className='Tile-border-corner Tile-border-bottom-left ' />)
+    }
+  }
+
+  return cornerBorders
+}
+
+const getDangerStyle = (danger) => {
+  let style = 'Tile-danger '
+
+  switch(danger) {
+    case 1:
+      style += 'Tile-danger-one '
+      break
+    case 2:
+      style += 'Tile-danger-two '
+      break
+    case 3:
+      style += 'Tile-danger-three '
+      break
+    case 4:
+      style += 'Tile-danger-four '
+      break
+    case 5:
+      style += 'Tile-danger-five '
+      break
+    case 6:
+      style += 'Tile-danger-six '
+      break
+    case 7:
+      style += 'Tile-danger-seven '
+      break
+    case 8:
+      style += 'Tile-danger-eight '
+      break
+    default:
+  }
 
   return style
 }
@@ -184,7 +291,10 @@ const Tile = ({ id, mine, danger, flag }) => {
       onClick={handleClick}
       onContextMenu={handleRightClick}
     >
-      {danger > 0 && danger < 9 ? danger : null}
+      <div className={getMainBorder(id, size, danger, dangers)}>
+        {getCornerBorders(id, size, danger, dangers)} 
+      </div>
+      <div className={getDangerStyle(danger)}>{danger > 0 && danger < 9 ? danger : null}</div>
     </div>
   )
 }

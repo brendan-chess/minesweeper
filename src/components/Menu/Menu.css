@@ -1,6 +1,6 @@
 .Menu-container {
   position: absolute;
-  transform: translate(0, 40vh);
+  top: 40vh;
 }
 
 .Menu-play {

@@ -7,7 +7,6 @@ const App = () => {
   return (
     <GameProvider>
       <div className='App-container'>
-        <h1>Minesweeper</h1>
         <Field />
         <Menu />
       </div>

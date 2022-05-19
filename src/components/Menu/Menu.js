@@ -6,6 +6,7 @@ const renderMenu = (gameState, setGameState) => {
     case 'ready':
       return (
         <div className='Menu-play'>
+          <h1>Minesweeper</h1>
           <div className='Menu-play-title' onClick={() => setGameState('playing')}>Play</div>
           <div className='Menu-play-subtitle'>🚧 Work in progress! 🚧</div>
         </div>
