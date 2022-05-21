@@ -5,6 +5,45 @@
   background-color: #74A366;
 }
 
+.Tile-reveal-light {
+  animation: tile-reveal-light 0.3s forwards;
+}
+
+@keyframes tile-reveal-light {
+  0% {
+    background-color: #74A366;
+  }
+  100% {
+    background-color: #FFEEA3;
+  }
+}
+
+.Tile-reveal-dark {
+  animation: tile-reveal-dark 0.3s forwards;
+}
+
+@keyframes tile-reveal-dark {
+  0% {
+    background-color: #6A995C;
+  }
+  100% {
+    background-color: #F3E39C;
+  }
+}
+
+/* .Tile-danger-reveal {
+  animation: tile-danger-reveal 0.5s forwards;
+}
+
+@keyframes tile-danger-reveal {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+} */
+
 .Tile-enabled:hover {
   opacity: 0.7;
 }

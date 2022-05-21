@@ -234,54 +234,7 @@ const getCornerBorders = (id, size, danger, dangers) => {
   return cornerBorders
 }
 
-const getDangerStyle = (danger, size) => {
-  let style = ''
 
-  switch(size) {
-    case 9:
-      style += 'Tile-danger-easy '
-      break
-    case 15:
-      style += 'Tile-danger-medium '
-      break
-    case 25:
-      style += 'Tile-danger-hard '
-      break
-    default:
-      break
-  }
-
-  switch(danger) {
-    case 1:
-      style += 'Tile-danger-one '
-      break
-    case 2:
-      style += 'Tile-danger-two '
-      break
-    case 3:
-      style += 'Tile-danger-three '
-      break
-    case 4:
-      style += 'Tile-danger-four '
-      break
-    case 5:
-      style += 'Tile-danger-five '
-      break
-    case 6:
-      style += 'Tile-danger-six '
-      break
-    case 7:
-      style += 'Tile-danger-seven '
-      break
-    case 8:
-      style += 'Tile-danger-eight '
-      break
-    default:
-      break
-  }
-
-  return style
-}
 
 const Tile = ({ id, mine, danger, flag }) => {
   const { size, mines, dangers, setDangers, gameState, setGameState, flags, setFlags, revealedCount, setRevealedCount } = useGame()
@@ -336,6 +289,11 @@ const Tile = ({ id, mine, danger, flag }) => {
 
   const getStyle = () => {
     let style = 'Tile-container '
+
+    if(danger >= 0 && danger <= 9) {
+      if(id % 2 === 0) style += 'Tile-reveal-light '
+      else style += 'Tile-reveal-dark '
+    }
    
     // change to difficulty
     switch(size) {
@@ -369,6 +327,57 @@ const Tile = ({ id, mine, danger, flag }) => {
     return style
   }
 
+  const getDangerStyle = () => {
+    let style = ''
+
+    // if(danger > -1) style += 'Tile-danger-reveal '
+  
+    switch(size) {
+      case 9:
+        style += 'Tile-danger-easy '
+        break
+      case 15:
+        style += 'Tile-danger-medium '
+        break
+      case 25:
+        style += 'Tile-danger-hard '
+        break
+      default:
+        break
+    }
+  
+    switch(danger) {
+      case 1:
+        style += 'Tile-danger-one '
+        break
+      case 2:
+        style += 'Tile-danger-two '
+        break
+      case 3:
+        style += 'Tile-danger-three '
+        break
+      case 4:
+        style += 'Tile-danger-four '
+        break
+      case 5:
+        style += 'Tile-danger-five '
+        break
+      case 6:
+        style += 'Tile-danger-six '
+        break
+      case 7:
+        style += 'Tile-danger-seven '
+        break
+      case 8:
+        style += 'Tile-danger-eight '
+        break
+      default:
+        break
+    }
+  
+    return style
+  }
+
   return (
     <div 
       className={getStyle()}
@@ -382,7 +391,7 @@ const Tile = ({ id, mine, danger, flag }) => {
         flag ? 
         <div className='Tile-flag' />
         :
-        <div className={getDangerStyle(danger, size)}>{danger > 0 && danger < 9 ? danger : null}</div>
+        <div className={getDangerStyle()}>{danger > 0 && danger < 9 ? danger : null}</div>
       }
     </div>
   )
