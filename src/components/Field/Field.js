@@ -1,10 +1,23 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import './Field.css'
 import Tile from '../Tile/Tile'
 import { useGame } from '../../gameContext'
 
 const initializeMines = (size) => {
-  const count = size * 2 // arbitrary
+  let count = 0
+
+  switch(size) {
+    case 9:
+      count = 10
+      break
+    case 15:
+      count = 40
+      break
+    case 25:
+      count = 60
+      break
+  }
+
   let indices = []
 
   let i = 0
@@ -41,7 +54,7 @@ const drawTiles = (size, mines, dangers, flags) => {
     let currentRow = []
 
     for(let column = 0; column < size; column++) {
-      let index = (row * 15) + column
+      let index = (row * size) + column
       currentRow.push(<Tile key={index} id={index} mine={mines[index]} danger={dangers[index]} flag={flags[index]} />)
     }
 
@@ -53,6 +66,7 @@ const drawTiles = (size, mines, dangers, flags) => {
 
 const Field = () => {
   const { size, mines, setMines, dangers, setDangers, gameState, setGameState, flags, setFlags, minesReduced, setMinesReduced, revealedCount } = useGame()
+  const [fadeIn, setFadeIn] = useState(false)
 
   useEffect(() => {
     if(gameState === 'playing') {
@@ -85,8 +99,13 @@ const Field = () => {
   
   useEffect(checkIfWon, [dangers, flags, minesReduced, revealedCount, setGameState, size])
 
+  useEffect(() => setFadeIn(true))
+
   return mines && (
-    <div className='Field-container'>
+    <div 
+      className='Field-container Field-fade-in'
+      onAnimationEnd={() => setFadeIn(false)}
+    >
       <div className={gameState === 'playing' ? null : 'Field-overlay'}>
         {drawTiles(size, mines, dangers, flags)}
       </div>

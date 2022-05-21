@@ -1,10 +1,10 @@
 .Field-container {
-  width: 600px;
-  height: 600px;
+  width: 675px;
+  height: 675px;
   background-color: black;
   border-radius: 10px;
   overflow: hidden;
-  margin-top: 50px;
+  margin-top: 80px;
   position: relative;
 }
 
@@ -14,4 +14,19 @@
 
 .Field-overlay {
   opacity: 0.75;
+}
+
+.Field-fade-in {
+  animation: fadeIn 0.7s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.5, 0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1, 1);
+  }
 }

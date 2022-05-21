@@ -1,6 +1,7 @@
 .Menu-container {
   position: absolute;
-  top: 40vh;
+  top: 25vh;
+  user-select: none;
 }
 
 .Menu-play {
@@ -10,10 +11,113 @@
 }
 
 .Menu-play-title {
-  color: white;
+  font-size: 64px;
+  color: oldlace;
+  font-family: 'Bungee', cursive;
+  margin-bottom: 5vh;
+}
+
+.Menu-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 130px;
+  height: 50px;
+  color: oldlace;
   font-size: 28px;
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 700;
+  font-family: 'Signika Negative', sans-serif;
   cursor: pointer;
+  background-color: #74A366;
+  border-radius: 5px;
+}
+
+.Menu-button:hover {
+  opacity: 0.7;
+}
+
+.Menu-fade-out {
+  animation: fadeOut 0.7s forwards;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    transform: scale(1, 1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.5, 0.5);
+  }
+}
+
+.Menu-interactable {
+  display: flex;
+  align-items: center;
+}
+
+.Menu-difficulty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  cursor: pointer;
+  margin-top: 5vh;
+}
+
+.Menu-difficulty-selection {
+  color: oldlace;
+  font-family: 'Signika Negative', sans-serif;
+  font-size: 28px;
+}
+
+.Menu-difficulty-easy {
+  color: #f0950e;
+}
+
+.Menu-difficulty-medium {
+  color: #2E86AB;
+}
+
+.Menu-difficulty-hard {
+  color: #B4417E;
+}
+
+.Menu-difficulty-underline {
+  height: 2px; 
+  background-color: oldlace;
+  margin-top: 4px;
+}
+
+.Menu-difficulty-open-underline {
+  animation: open-underline 0.4s forwards;
+}
+
+@keyframes open-underline {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.Menu-instructions-title {
+  color: lightgray;
+  /* font-style: italic; */
+  /* text-decoration: underline; */
+  font-weight: 700;
+  margin-top: 5vh;
+  margin-bottom: 1vh;
+  font-family: 'Signika Negative', sans-serif;
+  font-size: 24px;
+}
+
+.Menu-instructions-text {
+  color: lightgray;
+  font-family: 'Signika Negative', sans-serif;
+  font-size: 20px;
+  width: 500px;
+  text-align: center;
 }
 
 .Menu-play-subtitle {

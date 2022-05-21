@@ -2,11 +2,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 40px;
-  height: 40px;
   background-color: #74A366;
 }
-
 
 .Tile-enabled:hover {
   opacity: 0.7;
@@ -14,26 +11,21 @@
 
 .Tile-light {
   background-color: #74A366;
-  /* border-color: #74A366; */
 }
 
 .Tile-dark {
   background-color: #6A995C;
-  /* border-color: #6A995C; */
 }
 
 .Tile-revealed-light {
   background-color: #FFEEA3;
-  /* border-color: #FFEEA3; */
 }
 
 .Tile-revealed-dark {
   background-color: #F3E39C;
-  /* border-color: #F3E39C; */
 }
 
 .Tile-mine {
-  /* background-color: darkred; */
   background-image: url(mine.svg);
   background-size: 30px;
   background-repeat: no-repeat;
@@ -41,16 +33,30 @@
 }
 
 .Tile-flag {
+  width: 100%;
+  height: 100%;
   background-image: url(flag.svg);
-  background-size: 30px;
+  background-size: 70%;
   background-repeat: no-repeat;
   background-position: center;
+  animation: drop-flag 0.5s forwards;
+}
+
+@keyframes drop-flag {
+  0% {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
 }
 
 .Tile-border {
   position: absolute;
-  width: 40px;
-  height: 40px;
+  width: inherit;
+  height: inherit;
   box-sizing: border-box;
 }
 
@@ -88,9 +94,22 @@
 
 .Tile-border-corner {
   position: absolute;
+  background-color: #406348;
+}
+
+.Tile-border-corner-easy {
+  width: 3px;
+  height: 3px;
+}
+
+.Tile-border-corner-medium {
   width: 2px;
   height: 2px;
-  background-color: #406348;
+}
+
+.Tile-border-corner-hard {
+  width: 1px;
+  height: 1px;
 }
 
 .Tile-border-top-left {
@@ -113,22 +132,43 @@
   left: 0;
 }
 
-.Tile-danger {
+.Tile-border-easy {
+  border-width: 3px;
+}
+
+.Tile-border-medium {
+  border-width: 2px;
+}
+
+.Tile-border-hard {
+  border-width: 1px;
+}
+
+.Tile-danger-easy {
   font-weight: 700;
+  font-size: 28px;
+}
+
+.Tile-danger-medium {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.Tile-danger-hard {
+  font-weight: 600;
+  font-size: 16px;
 }
 
 .Tile-danger-one {
-  color: #F18F01;
+  color: #d98202;
 }
 
 .Tile-danger-two {
   color: #2E86AB;
-
 }
 
 .Tile-danger-three {
   color: #B4417E;
-
 }
 
 .Tile-danger-four {
@@ -149,4 +189,19 @@
 
 .Tile-danger-eight {
   color: #1E5771;
+}
+
+.Tile-easy {
+  width: 75px;
+  height: 75px;
+}
+
+.Tile-medium {
+  width: 45px;
+  height: 45px;
+}
+
+.Tile-hard {
+  width: 27px;
+  height: 27px;
 }
