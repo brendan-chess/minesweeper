@@ -15,8 +15,6 @@ const renderDifficulty = (difficulty) => {
   }
 }
 
-
-
 const getDifficultyColor = (difficulty) => {
   // switch(difficulty) {
   //   case 0:
@@ -29,40 +27,40 @@ const getDifficultyColor = (difficulty) => {
 }
 
 const Menu = () => {
-  const { gameState, setGameState } = useGame()
   const [fadeOut, setFadeOut] = useState(false)
   // const [difficulty, setDifficulty] = useState(0)
   const game = useGame()
   const [openUnderline, setOpenUnderline] = useState(false)
 
   const updateDifficulty = () => {
+    // Transition: Easy -> Medium -> Hard -> Easy...
     switch(game.difficulty) {
-      case 0:
-        game.setDifficulty(1)
-        game.setSize(15) // Medium size
+      case game.EASY_DIFFICULTY:
+        game.setDifficulty(game.MEDIUM_DIFFICULTY)
+        game.setSize(game.MEDIUM_SIZE)
         break
-      case 1:
-        game.setDifficulty(2)
-        game.setSize(25) // Hard size
+      case game.MEDIUM_DIFFICULTY:
+        game.setDifficulty(game.HARD_DIFFICULTY)
+        game.setSize(game.HARD_SIZE)
         break
-      case 2:
-        game.setDifficulty(0)
-        game.setSize(9) // Easy size
+      case game.HARD_DIFFICULTY:
+        game.setDifficulty(game.EASY_DIFFICULTY)
+        game.setSize(game.EASY_SIZE)
         break
       default:
-        game.setDifficulty(0)
-        game.setSize(9)
+        game.setDifficulty(game.EASY_DIFFICULTY)
+        game.setSize(game.EASY_SIZE)
     }
   }
 
   const renderMenu = () => {
-    switch(gameState) {
-      case 'ready':
+    switch(game.gameState) {
+      case game.READY_STATE:
         return (
           <div 
             className={'Menu-play ' + (fadeOut ? 'Menu-fade-out ' : '')}
             onAnimationEnd={() => {
-              if(fadeOut) setGameState('playing')
+              if(fadeOut) game.setGameState(game.PLAYING_STATE)
             }}
           >
             <div className='Menu-play-title '>Minesweeper</div>
@@ -89,18 +87,24 @@ const Menu = () => {
             <div className='Menu-instructions-text '>Left-click to dig a tile. Right-click to place a flag. To win, cover all mines with flags and dig all remaining tiles.</div>
           </div>
         )
-      case 'lost':
+      case game.LOST_STATE:
         return (
           <div className='Menu-lost'>
             <div className='Menu-lost-title'>You lost</div> 
-            <div className='Menu-play-title' onClick={() => setGameState('playing')}>Play again</div>
+            <div 
+              className='Menu-button '
+              onClick={() => game.setGameState(game.PLAYING_STATE)}
+            >
+              Play Again ➜
+            </div>
           </div>
         )
-      case 'won':
+      case game.WON_STATE:
         return (
           <div className='Menu-won'>
             <div className='Menu-won-title'>You won</div> 
-            <div className='Menu-play-title' onClick={() => setGameState('playing')}>Play again</div>
+            <div 
+              className='Menu-play-title' onClick={() => game.setGameState(game.PLAYING_STATE)}>Play again</div>
           </div>
         )
       default: return null

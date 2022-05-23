@@ -3,42 +3,6 @@ import './Field.css'
 import Tile from '../Tile/Tile'
 import { useGame } from '../../gameContext'
 
-const initializeMines = (size) => {
-  let count = 0
-
-  switch(size) {
-    case 9:
-      count = 10
-      break
-    case 15:
-      count = 40
-      break
-    case 25:
-      count = 60
-      break
-  }
-
-  let indices = []
-
-  let i = 0
-  while(i < count) {
-    let randomIndex = Math.floor(Math.random() * size * size)
-    if(!indices.includes(randomIndex)) {
-      indices.push(randomIndex)
-      i++
-    }
-  }
-
-  let mines = new Array(size * size).fill(0)
-
-  for(let j = 0; j < count; j++) {
-    let index = indices[j]
-    mines[index] = 1
-  }
-
-  return { mines, minesReduced: indices }
-}
-
 const initializeDangers = (size) => {
   return new Array(size * size).fill(-1)
 }
@@ -47,67 +11,98 @@ const initializeFlags = (size) => {
   return new Array(size * size).fill(0)
 }
 
-const drawTiles = (size, mines, dangers, flags) => {
-  let tiles = []
+const Field = () => {
+  const game = useGame()
 
-  for(let row = 0; row < size; row++) {
-    let currentRow = []
-
-    for(let column = 0; column < size; column++) {
-      let index = (row * size) + column
-      currentRow.push(<Tile key={index} id={index} mine={mines[index]} danger={dangers[index]} flag={flags[index]} />)
+  const initializeMines = () => {
+    let count = 0
+  
+    // change to difficulty
+    switch(game.size) {
+      case 9:
+        count = 10
+        break
+      case 15:
+        count = 40
+        break
+      case 25:
+        count = 60
+        break
     }
-
-    tiles.push(<div key={row} className='Field-row'>{currentRow}</div>)
+  
+    let indices = []
+  
+    let i = 0
+    while(i < count) {
+      let randomIndex = Math.floor(Math.random() * game.size * game.size)
+      if(!indices.includes(randomIndex)) {
+        indices.push(randomIndex)
+        i++
+      }
+    }
+  
+    let mines = new Array(game.size * game.size).fill(0)
+  
+    for(let j = 0; j < count; j++) {
+      let index = indices[j]
+      mines[index] = 1
+    }
+  
+    return { mines, minesReduced: indices }
   }
 
-  return tiles
-}
-
-const Field = () => {
-  const { size, mines, setMines, dangers, setDangers, gameState, setGameState, flags, setFlags, minesReduced, setMinesReduced, revealedCount } = useGame()
-  const [fadeIn, setFadeIn] = useState(false)
-
   useEffect(() => {
-    if(gameState === 'playing') {
-      const { mines, minesReduced } = initializeMines(size)
-      setMines(mines)
-      setMinesReduced(minesReduced)
-      setDangers(initializeDangers(size))
-      setFlags(initializeFlags(size))
+    if(game.gameState === game.PLAYING_STATE) {
+      const { mines, minesReduced } = initializeMines()
+      game.setMines(mines)
+      game.setMinesReduced(minesReduced)
+      game.setDangers(initializeDangers(game.size))
+      game.setFlags(initializeFlags(game.size))
     }
-  }, [setMines, setDangers, size, setFlags, gameState, setMinesReduced])
+  }, [game.setMines, game.setDangers, game.size, game.setFlags, game.gameState, game.setMinesReduced])
+
+  const drawTiles = () => {
+    let tiles = []
+  
+    for(let row = 0; row < game.size; row++) {
+      let currentRow = []
+  
+      for(let column = 0; column < game.size; column++) {
+        let index = (row * game.size) + column
+        currentRow.push(<Tile key={index} id={index} mine={game.mines[index]} danger={game.dangers[index]} flag={game.flags[index]} />)
+      }
+  
+      tiles.push(<div key={row} className='Field-row'>{currentRow}</div>)
+    }
+  
+    return tiles
+  }
 
   const checkIfWon = () => {
-    if(minesReduced) {
+    if(game.minesReduced) {
       let won = true
       // conditions for winning:
       // number of tiles - number of mines = number revealed (all tiles revealed or flagged)
       // flags = minesReduced
   
-      if(!dangers.includes(-1)) {
-        minesReduced.every(index => {
-          const correctFlag = flags[index] === 1
+      if(!game.dangers.includes(-1)) {
+        game.minesReduced.every(index => {
+          const correctFlag = game.flags[index] === 1
           if(!correctFlag) won = false
           return correctFlag
         })
       } else won = false
   
-      if(won) setGameState('won')
+      if(won) game.setGameState(game.WON_STATE)
     }
   }
   
-  useEffect(checkIfWon, [dangers, flags, minesReduced, revealedCount, setGameState, size])
+  useEffect(checkIfWon, [game.dangers, game.flags, game.minesReduced, game.revealedCount, game.setGameState, game.size])
 
-  useEffect(() => setFadeIn(true))
-
-  return mines && (
-    <div 
-      className='Field-container Field-fade-in'
-      onAnimationEnd={() => setFadeIn(false)}
-    >
-      <div className={gameState === 'playing' ? null : 'Field-overlay'}>
-        {drawTiles(size, mines, dangers, flags)}
+  return game.mines && (
+    <div className='Field-container Field-fade-in'>
+      <div className={game.gameState === game.PLAYING_STATE ? null : 'Field-overlay'}>
+        {drawTiles()}
       </div>
     </div>
   )

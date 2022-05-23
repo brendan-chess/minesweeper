@@ -1,0 +1,13 @@
+.Status-container {
+  display: flex;
+  align-items: center;
+}
+
+.Status-flag-icon {
+  width: 30px;
+  height: 30px;
+  background-image: url(../../assets/flag.svg);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
