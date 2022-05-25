@@ -58,6 +58,8 @@ const Field = () => {
       game.setMinesReduced(minesReduced)
       game.setDangers(initializeDangers(game.size))
       game.setFlags(initializeFlags(game.size))
+      game.setFlagsReduced([])
+      game.setRevealedCount(0)
     }
   }, [game.setMines, game.setDangers, game.size, game.setFlags, game.gameState, game.setMinesReduced])
 
@@ -79,13 +81,16 @@ const Field = () => {
   }
 
   const checkIfWon = () => {
-    if(game.minesReduced) {
+    if(game.minesReduced.length > 0) {
       let won = true
       // conditions for winning:
       // number of tiles - number of mines = number revealed (all tiles revealed or flagged)
       // flags = minesReduced
   
+
       if(!game.dangers.includes(-1)) {
+        // todo: change to check equality of minesReduced and flagsReduced
+        // without that, covering the board in flags wins
         game.minesReduced.every(index => {
           const correctFlag = game.flags[index] === 1
           if(!correctFlag) won = false
@@ -93,7 +98,10 @@ const Field = () => {
         })
       } else won = false
   
-      if(won) game.setGameState(game.WON_STATE)
+      if(won) {
+        game.setGameState(game.WON_STATE)
+        game.setRunTimer(false)
+      } 
     }
   }
   

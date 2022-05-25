@@ -9,13 +9,15 @@ const GameProvider = ({ children }) => {
   const READY_STATE = 0, PLAYING_STATE = 1, WON_STATE = 2, LOST_STATE = 3
 
   const [size, setSize] = useState(EASY_SIZE)
-  const [mines, setMines] = useState(null)
+  const [mines, setMines] = useState(null) // A size x size array of 0's and 1's signaling if a mine is on a tile
   const [dangers, setDangers] = useState(null)
   const [gameState, setGameState] = useState(READY_STATE)
-  const [flags, setFlags] = useState(null)
-  const [minesReduced, setMinesReduced] = useState(null)
+  const [flags, setFlags] = useState(null) // A size x size array of 0's and 1's signaling if a flag is on a tile
+  const [flagsReduced, setFlagsReduced] = useState([]) // The indices of where flags are placed by the player
+  const [minesReduced, setMinesReduced] = useState([])
   const [revealedCount, setRevealedCount] = useState(0)
   const [difficulty, setDifficulty] = useState(EASY_DIFFICULTY)
+  const [runTimer, setRunTimer] = useState(false)
 
   const value = {
     EASY_DIFFICULTY, MEDIUM_DIFFICULTY, HARD_DIFFICULTY,
@@ -27,9 +29,11 @@ const GameProvider = ({ children }) => {
     dangers, setDangers, 
     gameState, setGameState, 
     flags, setFlags,
+    flagsReduced, setFlagsReduced,
     minesReduced, setMinesReduced,
     revealedCount, setRevealedCount,
-    difficulty, setDifficulty
+    difficulty, setDifficulty,
+    runTimer, setRunTimer
   }
 
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>

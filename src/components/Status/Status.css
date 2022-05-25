@@ -1,12 +1,55 @@
 .Status-container {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+  background-color: lightgray;
+  width: 675px;
+  border-radius: 8px;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 3px solid gray;
+}
+
+.Status-flag {
+  display: flex;
+  align-items: center;
 }
 
 .Status-flag-icon {
+  width: 40px;
+  height: 40px;
+  background-image: url(../../assets/flag.svg);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.Status-flag-text {
+  color: #2a2a2a;
+  font-weight: 700;
+  font-family: 'Signika Negative', sans-serif;
+  font-size: 24px;
+  margin-left: 5px;
+}
+
+.Status-timer {
+  display: flex;
+  align-items: center;
+}
+
+.Status-timer-text {
+  color: #2a2a2a;
+  font-weight: 700;
+  font-family: 'Signika Negative', sans-serif;
+  font-size: 24px;
+  margin: 0px 5px;
+}
+
+.Status-timer-icon {
   width: 30px;
   height: 30px;
-  background-image: url(../../assets/flag.svg);
+  background-image: url(../../assets/timer.svg);
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: center;

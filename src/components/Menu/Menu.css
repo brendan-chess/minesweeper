@@ -35,6 +35,20 @@
   opacity: 0.7;
 }
 
+.Menu-button-small {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  color: oldlace;
+  font-size: 24px;
+  font-weight: 600;
+  font-family: 'Signika Negative', sans-serif;
+  cursor: pointer;
+  background-color: #74A366;
+  border-radius: 5px;
+}
+
 .Menu-fade-out {
   animation: fadeOut 0.7s forwards;
 }
@@ -108,7 +122,7 @@
   margin-top: 5vh;
   margin-bottom: 1vh;
   font-family: 'Signika Negative', sans-serif;
-  font-size: 24px;
+  font-size: 26px;
 }
 
 .Menu-instructions-text {
@@ -116,7 +130,9 @@
   font-family: 'Signika Negative', sans-serif;
   font-size: 20px;
   width: 500px;
-  text-align: center;
+  padding-left: 12px;
+  text-indent: -12px;
+  margin: 3px 0px;
 }
 
 .Menu-play-subtitle {
@@ -126,20 +142,89 @@
   margin-top: 20px;
 }
 
-.Menu-lost {
+.Menu-replay {
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  background-color: rgba(215, 215, 215, 0.85);
+  padding: 25px 50px;
+  border-radius: 8px;
+  border: 3px solid gray;
+  margin-top: 30px;
 }
 
-.Menu-lost-title {
+.Menu-replay-title {
   font-family: 'Signika Negative', sans-serif;
   color: maroon;
   font-size: 36px;
 }
 
-.Menu-won-title {
-  color: blue;
-  font-size: 36px;
+.Menu-flags-correct {
+  display: flex;
+  align-items: center;
+  margin: 20px 0px 10px 0px;
+}
+
+.Menu-flags-correct-icon {
+  width: 30px;
+  height: 30px;
+  background-image: url(../../assets/flag.svg);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.Menu-flags-correct-text {
+  color: #2a2a2a;
+  font-weight: 500;
+  font-family: 'Signika Negative', sans-serif;
+  font-size: 24px;
+  margin-left: 5px;
+}
+
+.Menu-space-cleared {
+  display: flex;
+  align-items: center;
+  margin: 10px 0px 20px 0px;
+}
+
+.Menu-space-cleared-icon {
+  width: 30px;
+  height: 30px;
+  background-image: url(../../assets/shovel.svg);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.Menu-space-cleared-text {
+  color: #2a2a2a;
+  font-weight: 500;
+  font-family: 'Signika Negative', sans-serif;
+  font-size: 24px;
+  margin-left: 5px;
+}
+
+
+/* .Menu-difficulty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  cursor: pointer;
+  margin-top: 5vh;
+}
+
+.Menu-difficulty-selection {
+  color: oldlace;
+  font-family: 'Signika Negative', sans-serif;
+  font-size: 28px;
+} */
+
+.Menu-replay-difficulty {
+  margin-top: 20px;
+}
+
+.Menu-replay-difficulty-selection {
+  font-size: 24px;
+  color: #2a2a2a;
 }

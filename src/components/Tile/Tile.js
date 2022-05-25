@@ -205,7 +205,7 @@ const Tile = ({ id, mine, danger, flag }) => {
       const topLeftUnrevealed = game.dangers[id - game.size - 1] === -1 || game.dangers[id - game.size - 1] === 10
   
       if(topLeftUnrevealed) {
-        cornerBorders.push(<div className={baseStyle + 'Tile-border-top-left '}/>)
+        cornerBorders.push(<div key={id + 'tl'} className={baseStyle + 'Tile-border-top-left '}/>)
       }
     }
   
@@ -213,7 +213,7 @@ const Tile = ({ id, mine, danger, flag }) => {
       const topRightUnrevealed = game.dangers[id - game.size + 1] === -1 || game.dangers[id - game.size + 1] === 10
   
       if(topRightUnrevealed) {
-        cornerBorders.push(<div className={baseStyle + 'Tile-border-top-right '} />)
+        cornerBorders.push(<div key={id + 'tr'} className={baseStyle + 'Tile-border-top-right '} />)
       }
     }
   
@@ -221,7 +221,7 @@ const Tile = ({ id, mine, danger, flag }) => {
       const bottomRightUnrevealed = game.dangers[id + game.size + 1] === -1 || game.dangers[id + game.size + 1] === 10
   
       if(bottomRightUnrevealed) {
-        cornerBorders.push(<div className={baseStyle + 'Tile-border-bottom-right '} />)
+        cornerBorders.push(<div key={id + 'br'} className={baseStyle + 'Tile-border-bottom-right '} />)
       }
     }
   
@@ -229,7 +229,7 @@ const Tile = ({ id, mine, danger, flag }) => {
       const bottomLeftUnrevealed = game.dangers[id + game.size - 1] === -1 || game.dangers[id + game.size - 1] === 10
   
       if(bottomLeftUnrevealed) {
-        cornerBorders.push(<div className={baseStyle + 'Tile-border-bottom-left '} />)
+        cornerBorders.push(<div key={id + 'bl'} className={baseStyle + 'Tile-border-bottom-left '} />)
       }
     }
   
@@ -240,39 +240,51 @@ const Tile = ({ id, mine, danger, flag }) => {
     // flags and dangers are updated with the position of the new flag
     const newFlags = [...game.flags]
     const newDangers = [...game.dangers]
+    const newFlagsReduced = [...game.flagsReduced]
   
     if(newFlags[id] === 0) {
       // Tile is unrevealed, place a flag
-      newFlags[id] = 1
-      newDangers[id] = 10
+      if(game.flagsReduced.length < game.minesReduced.length) {
+        newFlags[id] = 1
+        newDangers[id] = 10
+        newFlagsReduced.push(id)
+      }
     } else {
       // Tile has a flag already, remove the flag
       newFlags[id] = 0
       newDangers[id] = -1
+      newFlagsReduced.splice(newFlagsReduced.indexOf(id), 1)
     } 
   
-    return { newFlags, newDangers }
+    game.setFlags(newFlags)
+    game.setDangers(newDangers) 
+    game.setFlagsReduced(newFlagsReduced)
   }
 
   const handleClick = () => {
+    if(!game.runTimer) game.setRunTimer(true)
+
     if(game.gameState === game.PLAYING_STATE && danger === -1) {
       const { newDangers, newRevealedCount } = reveal()
       if(mine) {
         game.setGameState(game.LOST_STATE)
-        game.setRevealedCount(0)
+        // game.setRevealedCount(0)
+        game.setRunTimer(false)
       } else {
         game.setRevealedCount(game.revealedCount + newRevealedCount)
       }
+      // Update dangers here so that a revealed mine or danger is shown
       game.setDangers(newDangers)
     }
   }
 
   const handleRightClick = (event) => {
     event.preventDefault()
+    if(!game.runTimer) game.setRunTimer(true)
     if(game.gameState === game.PLAYING_STATE && (danger === -1 || danger === 10)) {
-      const { newFlags, newDangers } = placeFlag()
-      game.setFlags(newFlags)
-      game.setDangers(newDangers)
+      if(game.flagsReduced.length <= game.minesReduced.length) {
+        placeFlag()
+      }
     }
   }
 
