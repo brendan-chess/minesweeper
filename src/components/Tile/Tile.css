@@ -96,6 +96,8 @@
   position: absolute;
   width: inherit;
   height: inherit;
+  max-width: inherit;
+  max-height: inherit;
   box-sizing: border-box;
 }
 
@@ -243,4 +245,35 @@
 .Tile-hard {
   width: 27px;
   height: 27px;
+}
+
+@media only screen and (max-width: 1024px) {
+  .Tile-easy {
+    width: calc(100vw / 9);
+    height: calc(100vw / 9);
+    max-width: calc(600px / 9);
+    max-height: calc(600px / 9);
+  }
+  
+  .Tile-medium {
+    width: calc(100vw / 15);
+    height: calc(100vw / 15);
+  }
+  
+  .Tile-hard {
+    width: calc(100vw / 25);
+    height: calc(100vw / 25);
+  }
+
+  .Tile-danger-easy {
+    font-size: 24px;
+  }
+  
+  .Tile-danger-medium {
+    font-size: 16px;
+  }
+  
+  .Tile-danger-hard {
+    font-size: 10px;
+  }
 }

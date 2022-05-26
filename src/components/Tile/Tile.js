@@ -262,13 +262,17 @@ const Tile = ({ id, mine, danger, flag }) => {
   }
 
   const handleClick = () => {
+    if(game.activeControl === game.ACTIVE_FLAG) {
+      handleRightClick()
+      return
+    }
+
     if(!game.runTimer) game.setRunTimer(true)
 
     if(game.gameState === game.PLAYING_STATE && danger === -1) {
       const { newDangers, newRevealedCount } = reveal()
       if(mine) {
         game.setGameState(game.LOST_STATE)
-        // game.setRevealedCount(0)
         game.setRunTimer(false)
       } else {
         game.setRevealedCount(game.revealedCount + newRevealedCount)
@@ -279,7 +283,7 @@ const Tile = ({ id, mine, danger, flag }) => {
   }
 
   const handleRightClick = (event) => {
-    event.preventDefault()
+    if(event) event.preventDefault()
     if(!game.runTimer) game.setRunTimer(true)
     if(game.gameState === game.PLAYING_STATE && (danger === -1 || danger === 10)) {
       if(game.flagsReduced.length <= game.minesReduced.length) {
