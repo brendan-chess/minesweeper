@@ -113,7 +113,7 @@ const Menu = () => {
             <div className='Menu-instructions-title '>Instructions</div>
             {/* <div className='Menu-instructions-text '>Left-click to dig a tile. A tile may have a number, which describes how many mines are present within its neighboring tiles. Right-click to place a flag. To win, cover all mines with flags and dig all remaining tiles.</div> */}
             <p className='Menu-instructions-text '>- Left-click to dig a tile</p>
-            <p className='Menu-instructions-text '>- A tile may have a number, which describes how many mines are present within its neighboring tiles</p>
+            <p className='Menu-instructions-text '>- A tile may have a number, which describes how many mines are present among its 8 neighboring tiles</p>
             <p className='Menu-instructions-text '>- Right-click to place a flag</p>
             <p className='Menu-instructions-text '>- To win, cover all mines with flags and dig all remaining tiles</p>
           </div>
