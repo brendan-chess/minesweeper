@@ -50,7 +50,11 @@ const Menu = () => {
         game.setDifficulty(game.MEDIUM_DIFFICULTY)
         break
       case game.MEDIUM_DIFFICULTY:
-        game.setDifficulty(game.HARD_DIFFICULTY)
+        if(window.innerWidth < 1024) {
+          game.setDifficulty(game.EASY_DIFFICULTY)
+        } else {
+          game.setDifficulty(game.HARD_DIFFICULTY)  
+        }
         break
       case game.HARD_DIFFICULTY:
         game.setDifficulty(game.EASY_DIFFICULTY)
@@ -104,7 +108,7 @@ const Menu = () => {
                 onMouseLeave={() => setOpenUnderline(false)}
                 onClick={updateDifficulty}
               >
-                {renderDifficulty(game.difficulty)}
+                Difficuly - {renderDifficulty(game.difficulty)}
               </div>
               <div 
                 className={'Menu-difficulty-underline ' + (openUnderline ? 'Menu-difficulty-open-underline' : '')}

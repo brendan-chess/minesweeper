@@ -258,11 +258,15 @@
   .Tile-medium {
     width: calc(100vw / 15);
     height: calc(100vw / 15);
+    max-width: calc(600px / 15);
+    max-height: calc(600px / 15);
   }
   
   .Tile-hard {
     width: calc(100vw / 25);
     height: calc(100vw / 25);
+    max-width: calc(600px / 25);
+    max-height: calc(600px / 25);
   }
 
   .Tile-danger-easy {

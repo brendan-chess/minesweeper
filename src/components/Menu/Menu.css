@@ -234,10 +234,6 @@
     top: 150px;
   }
 
-  .Menu-play-title {
-    font-size: 11vw;
-  }
-
   .Menu-instructions-text {
     width: 85vw;
     margin: 5px 0px;
@@ -245,5 +241,11 @@
 
   .Menu-replay {
     margin-top: -50px;
+  }
+}
+
+@media only screen and (max-width: 580px) {
+  .Menu-play-title {
+    font-size: 11vw;
   }
 }
