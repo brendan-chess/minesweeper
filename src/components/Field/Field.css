@@ -51,3 +51,9 @@
     margin-top: 40px;
   }
 }
+
+@media only screen and (max-width: 580px) {
+  .Field-container {
+    margin-top: 20px;
+  }
+}

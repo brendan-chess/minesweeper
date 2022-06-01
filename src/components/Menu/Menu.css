@@ -237,12 +237,20 @@
   }
 
   .Menu-replay {
-    margin-top: -50px;
+    margin-top: 55px;
   }
 }
 
 @media only screen and (max-width: 580px) {
   .Menu-play-title {
     font-size: 11vw;
+  }
+
+  .Menu-container {
+    top: 40px;
+  }
+
+  .Menu-replay {
+    margin-top: 30px;
   }
 }
