@@ -319,8 +319,6 @@ const Tile = ({ id, mine, danger, flag }) => {
   
     if(game.gameState === game.PLAYING_STATE) style += 'Tile-enabled '
   
-    // if(flag) style += 'Tile-flag '
-  
     if(danger === 9) style += 'Tile-mine '
   
     if(danger >= 0 && danger < 10) {
