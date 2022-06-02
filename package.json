@@ -1,7 +1,7 @@
 {
   "name": "minesweeper",
   "version": "0.1.0",
-  "homepage": "https://www.minesweepergame.io/",
+  "homepage": "https://brendan-chess.github.io/minesweeper/",
   "private": false,
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
