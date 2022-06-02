@@ -2,6 +2,6 @@
 
 My take on Minesweeper. Implemented completely with React.
 
-## Link to Playable Demo
+## Link to Game
 
-https://brendan-chess.github.io/minesweeper/
+https://www.minesweepergame.io/
