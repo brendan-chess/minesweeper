@@ -305,11 +305,11 @@
   }
 
   .Tile-border-medium {
-    border-width: 1.5px;
+    border-width: 1px;
   }
 
   .Tile-border-corner-medium {
-    width: 1.25px;
-    height: 1.25px;
+    width: 1px;
+    height: 1px;
   }
 }
